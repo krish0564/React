@@ -1,22 +1,26 @@
-import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
+import { useState } from 'react';
+import { NavLink } from "react-router-dom";
 
 type Props = {};
 
 const Header = (props: Props) => {
+  const [expanded, setExpanded] = useState(false);
   return (
-    <Navbar fixed="top" bg="dark" variant="dark">
-      <Container>
-        <Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#about">About Us</Nav.Link>
-            <Nav.Link href="#services">Services</Nav.Link>
-            <Nav.Link href="#contact">Contact Us</Nav.Link>
+    <>
+      <Navbar expand="lg"style={{background:"black"}} variant="dark" expanded={expanded}>
+        <Navbar.Brand className="p-3" href='/' >Purchase Order</Navbar.Brand>
+        <Navbar.Toggle aria-controls='navbarSupportedContent' onClick={() => setExpanded(expanded ? false : true)} />
+        <Navbar.Collapse id='navbarSupportedContent'>
+          <Nav className='mr-auto ms-2'>
+            <Nav.Link as={NavLink} to="/" href='/' onClick={() => setExpanded(false)}>Home</Nav.Link>
+            <Nav.Link as={NavLink} to="/evc" href='/evc' onClick={() => setExpanded(false)}>EV Calculation</Nav.Link>
+            <Nav.Link as={NavLink} to="/dmr" href='/dmr' onClick={() => setExpanded(false)}>Raise DMR</Nav.Link>
+            <Nav.Link as={NavLink} to="/about" href='#' onClick={() => setExpanded(false)}>About Us</Nav.Link>
           </Nav>
-        </Navbar.Brand>
-      </Container>
-    </Navbar>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
   );
 };
 
